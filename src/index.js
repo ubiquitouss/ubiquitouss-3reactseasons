@@ -23,7 +23,7 @@ class App extends React.Component {
         super(props);
          
         //! this is the only time we do direct assignment to this.state
-        this.state = {lat: null};
+        this.state = {lat: null,errorMessage: ''};
         //for now we don't know whats the number of lattitude
         //that's why we've to use null initially
         //if we use 40 replacing null . the value will show 40
@@ -37,11 +37,20 @@ class App extends React.Component {
                 //!we did not!!!!!
                 //!this.state.lat = position.coords.latitude
             },
-            (err) => console.log(err)
+            (err) => {
+                console.log(err)//check this on the console to know err.message
+                this.setState({errorMessage: err.message});
+            }
         );
     }
     render (){
-        return <div>Latitude: {this.state.lat}</div>
+           if (this.state.errorMessage && !this.state.lat) {
+               return <div> Error: {this.state.errorMessage}</div>
+            }
+           if (!this.state.errorMessage && this.state.lat) {
+            return <div> Error: {this.state.lat}</div>
+            }
+            return <div>Loading......</div>
     }
 }
 
