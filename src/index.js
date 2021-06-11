@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import SeasonDisplay from './SeasonsDisplay'
+import Spinner from './Spinner';
 
 // const App = () => {
 //     window.navigator.geolocation.getCurrentPosition(
@@ -69,7 +70,7 @@ class App extends React.Component {
            if (!this.state.errorMessage && this.state.lat) {
             return <SeasonDisplay lat={this.state.lat}/>
             }
-            return <div>Loading......</div>
+            return <Spinner />
     }
 }
 
