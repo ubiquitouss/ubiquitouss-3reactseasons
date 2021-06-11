@@ -1,4 +1,19 @@
+import './SeasonDisplay.css'
 import React from 'react';
+import "semantic-ui-css/semantic.min.css"
+
+
+const seasonConfig = {
+    summer: {
+        text: "Let's hit the beach",
+        iconName: "sun"
+    },
+    winter: {
+        text: "Burr it is cold",
+        iconName: "snowflake"
+    }
+
+}
 
 
 const getSeason = (lat,month)=>{
@@ -24,7 +39,18 @@ const SeasonDisplay = (props) => {
     const season = getSeason(props.lat,new Date().getMonth())
     console.log(season)
     //props.lat = lattitude, new Date().getMonth() is javascript code for current month
-    return <div>Season Display</div>
+    // const text = season === 'winter'?'Burr, it is chilly' : "Let's hit the beach"
+    // const icon = season === 'winter' ? 'snowflake' : 'sun';
+    //let's do it in a better way
+    // console.log(icon + 'icon')
+
+    console.log(seasonConfig[season])// {text, iconName}}
+    const {text, iconName}= seasonConfig[season]
+    return <div className={`season-display ${season}`}>
+        <i className={'icon-left massive '+ iconName + ' icon'}></i>
+            <h1>{text}</h1>
+        <i className={'icon-right massive '+ iconName + ' icon'}></i>
+           </div>
 };
 
 export default SeasonDisplay;
